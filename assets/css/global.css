@@ -1,0 +1,67 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap");
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Oswald", sans-serif;
+  color: var(--color-black);
+}
+
+/* variable - переменная */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 40px;
+  margin-bottom: 12px;
+}
+
+p {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-black);
+}
+
+button {
+  border: 0;
+  background: none;
+  font-family: "Oswald", sans-serif;
+}
+
+img {
+  display: block;
+}
+
+section {
+  padding: 60px 0;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}

@@ -1,0 +1,25 @@
+$black: #222222;
+
+@mixin xl-block() {
+    @media screen and (max-width: 1440px) {
+        @content;
+    }
+}
+
+@mixin lg-block() {
+    @media screen and (max-width: 1199px) {
+        @content;
+    }
+}
+
+@mixin md-block() {
+    @media screen and (max-width: 991px) {
+        @content;
+    }
+}
+
+@mixin sm-block() {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
