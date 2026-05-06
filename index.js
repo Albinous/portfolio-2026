@@ -65,9 +65,9 @@ const initSlider = () => {
     isDragging = false;
   });
 
-  //   slider.addEventListener("pointerleave", (event) => {
-  //     isDragging = false;
-  //   });
+  slider.addEventListener("pointerleave", (event) => {
+    isDragging = false;
+  });
 
   if (!isTouchDevice) {
     slider.addEventListener("mousemove", (event) => {
