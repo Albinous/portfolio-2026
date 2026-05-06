@@ -28,10 +28,40 @@ const initSlider = () => {
   const slider = document.body.querySelector(".slider");
   const track = document.body.querySelector(".portfolio-slider");
 
+  let isDragging = false; // проверка идет ли свайп;
   let speed = 0;
   let position = 0;
 
+  let startX = 0;
+
+  slider.addEventListener("pointerdown", (event) => {
+    isDragging = true;
+    startX = event.clientX;
+    slider.style.cursor = "grabbing";
+  });
+
+  slider.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+
+    const delta = event.clientX;
+    -startX;
+    startX = event.clientX;
+
+    position += delta;
+  });
+
+  slider.addEventListener("pointerup", (event) => {
+    isDragging = false;
+    slider.style.cursor = "grabb";
+  });
+
+  slider.addEventListener("pointerleave", (event) => {
+    isDragging = false;
+  });
+
   slider.addEventListener("mousemove", (event) => {
+    if (isDragging) return;
+
     const rect = slider.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const width = rect.width;
