@@ -354,6 +354,7 @@
 
 .slider {
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .portfolio-slider {
