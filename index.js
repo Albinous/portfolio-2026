@@ -28,53 +28,86 @@ const initSlider = () => {
   const slider = document.body.querySelector(".slider");
   const track = document.body.querySelector(".portfolio-slider");
 
-  let speed = 0;
-  let position = 0;
-  let targetPosition = 0;
-
-  let startX = 0;
-  let isDragging = false;
-
+  // проверяем touch устройство или нет(для телефонов, планшетов)
   const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
-  slider.addEventListener("pointerdown", (event) => {
-    if (!isTouchDevice) return;
-    isDragging = true;
-    startX = event.clientX;
-    slider.style.cursor = "grabbing";
-  });
+  let speed = 0,
+    position = 0,
+    targetPosition = 0,
+    startX = 0,
+    isDragging = false; // идет ли сейчас свайп
 
-  slider.addEventListener("pointermove", (event) => {
-    if (!isTouchDevice || !isDragging) return;
+  // =========================================
+  // HELPERS
 
-    const currentX = event.clientX;
-    const delta = currentX - startX;
+  const clamp = (value, min, max) => {
+    return Math.max(min, Math.min(max, value));
+  };
 
-    if (delta > 20) {
-      targetPosition += 30;
-    }
-
-    if (delta < 20) {
-      targetPosition -= 30;
-    }
-
-    startX = currentX;
-  });
-
-  slider.addEventListener("pointerup", (event) => {
+  const stopDragging = () => {
     isDragging = false;
-  });
+  };
 
-  slider.addEventListener("pointerleave", (event) => {
-    isDragging = false;
-  });
+  // =========================================
+  // TOUCH EVENTS
 
-  if (!isTouchDevice) {
+  if (isTouchDevice) {
+    slider.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      isDragging = true;
+      // запоминаем стартовую позицию пальца
+      startX = event.clientX;
+      slider.style.cursor = "grabbing";
+    });
+
+    slider.addEventListener("pointermove", (event) => {
+      if (!isDragging) return;
+
+      const currentX = event.clientX;
+      // разница между прошлой и текущей позицией пальца
+      const delta = currentX - startX;
+
+      // мин. позиция, после которой считаем это свайпом
+      const swipeThreshold = 20;
+      const swipeStep = 30;
+
+      if (delta > swipeThreshold) {
+        // свайп вправо
+        position += swipeStep;
+      }
+
+      if (delta < -swipeThreshold) {
+        // свайп влево
+        position -= swipeStep;
+      }
+
+      startX = currentX;
+    });
+
+    slider.addEventListener("pointerup", (event) => {
+      stopDragging;
+    });
+
+    slider.addEventListener("pointerleave", (event) => {
+      stopDragging;
+    });
+
+    slider.addEventListener("pointercancel", (event) => {
+      stopDragging;
+    });
+  }
+
+  // =========================================
+  // DESKTOP HOVER
+  else {
     slider.addEventListener("mousemove", (event) => {
+      // получаем размеры и позицию слайдера
       const rect = slider.getBoundingClientRect();
+      // clientX - позиция мыши в координатах Х, rect.left - начало слайдера относительно документа. x - позиция мыши относительно слайдера
       const x = event.clientX - rect.left;
       const width = rect.width;
 
+      // вычисляем позицию мышки в процентах
       const percent = x / width;
 
       if (percent < 0.3) {
@@ -90,19 +123,17 @@ const initSlider = () => {
       speed = 0;
     });
   }
-
   function animate() {
     if (!isTouchDevice) {
-      targetPosition += speed;
+      position += speed;
     }
-    position += (targetPosition - position) * 0.1;
     const sliderWidth = slider.offsetWidth;
     const trackWidth = track.scrollWidth;
 
     const limit = trackWidth - sliderWidth;
 
-    targetPosition = Math.max(-limit, Math.min(limit, targetPosition));
-    position = Math.max(-limit, Math.min(limit, position));
+    // ограничиваем значение position, чтобы слайдер не уехал слишком далеко
+    position = clamp(position, -limit, limit);
     track.style.transform = `translateX(${position}px)`;
 
     requestAnimationFrame(animate);
