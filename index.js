@@ -48,7 +48,7 @@ const initSlider = () => {
     -startX;
     startX = event.clientX;
 
-    targetPosition += delta;
+    targetPosition += delta * 0.2;
   });
 
   slider.addEventListener("pointerup", (event) => {
