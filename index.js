@@ -69,7 +69,7 @@ const initSlider = () => {
 
       // мин. позиция, после которой считаем это свайпом
       const swipeThreshold = 20;
-      const swipeStep = 30;
+      const swipeStep = 100;
 
       if (delta > swipeThreshold) {
         // свайп вправо
