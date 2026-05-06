@@ -48,13 +48,14 @@ const initSlider = () => {
     if (!isTouchDevice || !isDragging) return;
 
     const currentX = event.clientX;
+    const delta = currentX - startX;
 
-    if (currentX < startX) {
-      targetPosition -= 10;
+    if (delta > 20) {
+      targetPosition += 30;
     }
 
-    if (currentX > startX) {
-      targetPosition += 10;
+    if (delta < 20) {
+      targetPosition -= 30;
     }
 
     startX = currentX;
