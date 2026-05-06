@@ -77,6 +77,10 @@ const initSlider = () => {
     }
   });
 
+  slider.addEventListener("mouseleave", () => {
+    speed = 0;
+  });
+
   function animate() {
     position += speed;
     const sliderWidth = slider.offsetWidth;
