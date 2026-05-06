@@ -28,62 +28,70 @@ const initSlider = () => {
   const slider = document.body.querySelector(".slider");
   const track = document.body.querySelector(".portfolio-slider");
 
-  let isDragging = false; // проверка идет ли свайп;
   let speed = 0;
   let position = 0;
   let targetPosition = 0;
 
   let startX = 0;
+  let isDragging = false;
+
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
   slider.addEventListener("pointerdown", (event) => {
+    if (!isTouchDevice) return;
     isDragging = true;
     startX = event.clientX;
     slider.style.cursor = "grabbing";
   });
 
   slider.addEventListener("pointermove", (event) => {
-    if (!isDragging) return;
+    if (!isTouchDevice || !isDragging) return;
 
-    const delta = event.clientX;
-    -startX;
-    startX = event.clientX;
+    const currentX = event.clientX;
 
-    targetPosition += delta * 0.2;
+    if (currentX < startX) {
+      targetPosition -= 10;
+    }
+
+    if (currentX > startX) {
+      targetPosition += 10;
+    }
+
+    startX = currentX;
   });
 
   slider.addEventListener("pointerup", (event) => {
     isDragging = false;
-    slider.style.cursor = "grabb";
   });
 
-  slider.addEventListener("pointerleave", (event) => {
-    isDragging = false;
-  });
+  //   slider.addEventListener("pointerleave", (event) => {
+  //     isDragging = false;
+  //   });
 
-  slider.addEventListener("mousemove", (event) => {
-    if (isDragging) return;
+  if (!isTouchDevice) {
+    slider.addEventListener("mousemove", (event) => {
+      const rect = slider.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const width = rect.width;
 
-    const rect = slider.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const width = rect.width;
+      const percent = x / width;
 
-    const percent = x / width;
+      if (percent < 0.3) {
+        speed = -2;
+      } else if (percent > 0.7) {
+        speed = 2;
+      } else {
+        speed = 0;
+      }
+    });
 
-    if (percent < 0.3) {
-      speed = -2;
-    } else if (percent > 0.7) {
-      speed = 2;
-    } else {
+    slider.addEventListener("mouseleave", () => {
       speed = 0;
-    }
-  });
-
-  slider.addEventListener("mouseleave", () => {
-    speed = 0;
-  });
+    });
+  }
 
   function animate() {
-    if (!isDragging) {
+    if (!isTouchDevice) {
       targetPosition += speed;
     }
     position += (targetPosition - position) * 0.1;
@@ -93,6 +101,7 @@ const initSlider = () => {
     const limit = trackWidth - sliderWidth;
 
     targetPosition = Math.max(-limit, Math.min(limit, targetPosition));
+    position = Math.max(-limit, Math.min(limit, position));
     track.style.transform = `translateX(${position}px)`;
 
     requestAnimationFrame(animate);
