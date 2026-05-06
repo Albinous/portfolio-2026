@@ -31,6 +31,7 @@ const initSlider = () => {
   let isDragging = false; // проверка идет ли свайп;
   let speed = 0;
   let position = 0;
+  let targetPosition = 0;
 
   let startX = 0;
 
@@ -47,7 +48,7 @@ const initSlider = () => {
     -startX;
     startX = event.clientX;
 
-    position += delta;
+    targetPosition += delta;
   });
 
   slider.addEventListener("pointerup", (event) => {
@@ -82,13 +83,16 @@ const initSlider = () => {
   });
 
   function animate() {
-    position += speed;
+    if (!isDragging) {
+      targetPosition += speed;
+    }
+    position += (targetPosition - position) * 0.1;
     const sliderWidth = slider.offsetWidth;
     const trackWidth = track.scrollWidth;
 
     const limit = trackWidth - sliderWidth;
 
-    position = Math.max(-limit, Math.min(limit, position));
+    targetPosition = Math.max(-limit, Math.min(limit, targetPosition));
     track.style.transform = `translateX(${position}px)`;
 
     requestAnimationFrame(animate);
