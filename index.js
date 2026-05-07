@@ -69,16 +69,16 @@ const initSlider = () => {
 
       // мин. позиция, после которой считаем это свайпом
       const swipeThreshold = 20;
-      const swipeStep = 100;
+      const swipeStep = 30;
 
       if (delta > swipeThreshold) {
         // свайп вправо
-        position += swipeStep;
+        targetPosition += swipeStep;
       }
 
       if (delta < -swipeThreshold) {
         // свайп влево
-        position -= swipeStep;
+        targetPosition -= swipeStep;
       }
 
       startX = currentX;
@@ -125,13 +125,15 @@ const initSlider = () => {
   }
   function animate() {
     if (!isTouchDevice) {
-      position += speed;
+      targetPosition += speed;
     }
+    position += (targetPosition - position) * 0.1;
     const sliderWidth = slider.offsetWidth;
     const trackWidth = track.scrollWidth;
 
     const limit = trackWidth - sliderWidth;
 
+    targetPosition = clamp(targetPosition, -limit, limit);
     // ограничиваем значение position, чтобы слайдер не уехал слишком далеко
     position = clamp(position, -limit, limit);
     track.style.transform = `translateX(${position}px)`;
