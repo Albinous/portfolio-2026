@@ -67,19 +67,8 @@ const initSlider = () => {
       // разница между прошлой и текущей позицией пальца
       const delta = currentX - startX;
 
-      // мин. позиция, после которой считаем это свайпом
-      const swipeThreshold = 20;
-      const swipeStep = 30;
-
-      if (delta > swipeThreshold) {
-        // свайп вправо
-        targetPosition += swipeStep;
-      }
-
-      if (delta < -swipeThreshold) {
-        // свайп влево
-        targetPosition -= swipeStep;
-      }
+      // свайп следует за пальцем и двигается столько, сколько и палец
+      targetPosition += delta;
 
       startX = currentX;
     });
