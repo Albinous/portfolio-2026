@@ -138,7 +138,18 @@ const initAccordion = () => {
   const accordion = document.querySelector(".faq-right");
 
   function toggleFaqAnswer(answer) {
-    answer.classList.toggle("active");
+    const isActive = answer.classList.contains("active");
+    const activeAnswers = document.querySelectorAll(".faq-answer.active");
+    if (isActive) {
+      answer.classList.remove("active");
+    } else {
+      activeAnswers.forEach((answer) => {
+        answer.classList.remove("active");
+        const answerBtn = answer.previousElementSibling.lastElementChild;
+        updateBtn(answer, answerBtn);
+      });
+      answer.classList.add("active");
+    }
   }
 
   function updateBtn(answer, btn) {
