@@ -143,10 +143,10 @@ const initAccordion = () => {
     if (isActive) {
       answer.classList.remove("active");
     } else {
-      activeAnswers.forEach((answer) => {
-        answer.classList.remove("active");
-        const answerBtn = answer.previousElementSibling.lastElementChild;
-        updateBtn(answer, answerBtn);
+      activeAnswers.forEach((activeAnswer) => {
+        activeAnswer.classList.remove("active");
+        const answerBtn = activeAnswer.previousElementSibling.lastElementChild;
+        updateBtn(activeAnswer, answerBtn);
       });
       answer.classList.add("active");
     }
