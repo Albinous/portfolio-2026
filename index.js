@@ -149,7 +149,7 @@ const initAccordion = () => {
     const faqHeader = event.target.closest(".faq-header");
     if (!faqHeader) return;
     const faqAnswer = faqHeader.nextElementSibling;
-    const toggleBtn = faqHeader.querySelector(".faq-btn");
+    const toggleBtn = faqHeader.lastElementChild;
     toggleFaqAnswer(faqAnswer);
     updateBtn(faqAnswer, toggleBtn);
   };
