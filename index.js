@@ -137,22 +137,22 @@ const initSlider = () => {
 const initAccordion = () => {
   const accordion = document.querySelector(".faq-right");
 
-  function toggleFaqAnswer(answer, btn) {
+  function toggleFaqAnswer(answer) {
     answer.classList.toggle("active");
-    if (answer.classList.contains("active")) {
-      btn.textContent = "-";
-    } else {
-      btn.textContent = "+";
-    }
   }
 
-  const defineFaqHeader = (event) => {
-    const faqHeader = event.target.closest("div");
+  function updateBtn(answer, btn) {
+    btn.textContent = answer.classList.contains("active") ? "-" : "+";
+  }
+
+  const handleFaqClick = (event) => {
+    const faqHeader = event.target.closest(".faq-header");
     if (!faqHeader) return;
     const faqAnswer = faqHeader.nextElementSibling;
     const toggleBtn = faqHeader.querySelector(".faq-btn");
-    toggleFaqAnswer(faqAnswer, toggleBtn);
+    toggleFaqAnswer(faqAnswer);
+    updateBtn(faqAnswer, toggleBtn);
   };
 
-  accordion.addEventListener("click", defineFaqHeader);
+  accordion.addEventListener("click", handleFaqClick);
 };
