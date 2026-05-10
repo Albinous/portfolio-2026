@@ -139,7 +139,7 @@ const initAccordion = () => {
 
   function toggleFaqAnswer(answer) {
     const isActive = answer.classList.contains("active");
-    const activeAnswers = document.querySelectorAll(".faq-answer.active");
+    const activeAnswers = accordion.querySelectorAll(".faq-answer.active");
     if (isActive) {
       answer.classList.remove("active");
     } else {
