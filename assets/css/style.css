@@ -532,8 +532,8 @@ section {
 
 .slider {
   overflow: hidden;
-  -ms-touch-action: pan-y;
-      touch-action: pan-y;
+  -ms-touch-action: none;
+      touch-action: none;
 }
 
 .portfolio-slider {
@@ -615,6 +615,13 @@ section {
 
 .faq-answer {
   margin-bottom: 20px;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.3s ease;
+  transition: max-height 0.3s ease;
+}
+.faq-answer.active {
+  max-height: 100px;
 }
 
 .faq-btn {

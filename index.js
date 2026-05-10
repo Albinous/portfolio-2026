@@ -137,10 +137,16 @@ const initSlider = () => {
 const initAccordion = () => {
   const accordion = document.querySelector(".faq-right");
 
-  const accordionToggle = (event) => {
-    if (event.target.classList.contains("faq-header")) {
-    }
+  function toggleFaqAnswer(answer) {
+    answer.classList.toggle("active");
+  }
+
+  const defineFaqHeader = (event) => {
+    const faqHeader = event.target.closest("div");
+    if (!faqHeader) return;
+    const faqAnswer = faqHeader.nextElementSibling;
+    toggleFaqAnswer(faqAnswer);
   };
 
-  accordion.addEventListener("click", accordionToggle);
+  accordion.addEventListener("click", defineFaqHeader);
 };
