@@ -412,6 +412,13 @@
 
 .faq-answer {
   margin-bottom: 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+  &.active {
+    max-height: 100px;
+  }
 }
 
 .faq-btn {

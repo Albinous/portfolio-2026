@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   initBurgerMenu();
   initSlider();
+  initAccordion();
 });
 
 const initBurgerMenu = () => {
@@ -131,4 +132,15 @@ const initSlider = () => {
   }
 
   animate();
+};
+
+const initAccordion = () => {
+  const accordion = document.querySelector(".faq-right");
+
+  const accordionToggle = (event) => {
+    if (event.target.classList.contains("faq-header")) {
+    }
+  };
+
+  accordion.addEventListener("click", accordionToggle);
 };
