@@ -145,7 +145,8 @@ const initAccordion = () => {
     } else {
       activeAnswers.forEach((activeAnswer) => {
         activeAnswer.classList.remove("active");
-        const answerBtn = activeAnswer.previousElementSibling.lastElementChild;
+        const answerBtn =
+          activeAnswer.previousElementSibling.querySelector(".faq-btn");
         updateBtn(activeAnswer, answerBtn);
       });
       answer.classList.add("active");
@@ -160,7 +161,7 @@ const initAccordion = () => {
     const faqHeader = event.target.closest(".faq-header");
     if (!faqHeader) return;
     const faqAnswer = faqHeader.nextElementSibling;
-    const toggleBtn = faqHeader.lastElementChild;
+    const toggleBtn = faqHeader.querySelector(".faq-btn");
     toggleFaqAnswer(faqAnswer);
     updateBtn(faqAnswer, toggleBtn);
   };
