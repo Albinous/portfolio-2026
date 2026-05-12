@@ -137,19 +137,23 @@ const initSlider = () => {
 const initAccordion = () => {
   const accordion = document.querySelector(".faq-right");
 
-  function toggleFaqAnswer(answer) {
-    const isActive = answer.classList.contains("active");
+  function toggleFaq(faqItem) {
+    const faqAnswer = faqItem.querySelector(".faq-answer");
+    const faqBtn = faqItem.querySelector(".faq-btn");
+
+    const isActive = faqAnswer.classList.contains("active");
     const activeAnswers = accordion.querySelectorAll(".faq-answer.active");
-    if (isActive) {
-      answer.classList.remove("active");
-    } else {
-      activeAnswers.forEach((activeAnswer) => {
-        activeAnswer.classList.remove("active");
-        const answerBtn =
-          activeAnswer.previousElementSibling.querySelector(".faq-btn");
-        updateBtn(activeAnswer, answerBtn);
-      });
-      answer.classList.add("active");
+
+    activeAnswers.forEach((activeAnswer) => {
+      activeAnswer.classList.remove("active");
+      const activeBtn =
+        activeAnswer.previousElementSibling.querySelector(".faq-btn");
+      activeBtn.textContent = "+";
+    });
+
+    if (!isActive) {
+      faqAnswer.classList.add("active");
+      faqBtn.textContent = "-";
     }
   }
 
@@ -173,21 +177,17 @@ const initAccordion = () => {
       `.faq-item[data-id = "${questionID}"]`,
     );
     if (!faqItem) return;
-    const faqAnswer = faqItem.querySelector(".faq-answer");
-    const faqBtn = faqItem.querySelector(".faq-btn");
-    toggleFaqAnswer(faqAnswer);
-    updateBtn(faqAnswer, faqBtn);
+
+    toggleFaq(faqItem);
   }
 
   const handleFaqClick = (event) => {
     const faqHeader = event.target.closest(".faq-header");
     if (!faqHeader) return;
-    const questionID = event.target.closest(".faq-item").dataset.id;
-    setLocalStorageQuestion(questionID);
-    const faqAnswer = faqHeader.nextElementSibling;
-    const toggleBtn = faqHeader.querySelector(".faq-btn");
-    toggleFaqAnswer(faqAnswer);
-    updateBtn(faqAnswer, toggleBtn);
+
+    const faqItem = faqHeader.closest(".faq-item");
+    setLocalStorageQuestion(faqItem.dataset.id);
+    toggleFaq(faqItem);
   };
 
   accordion.addEventListener("click", handleFaqClick);
