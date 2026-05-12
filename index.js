@@ -157,9 +157,33 @@ const initAccordion = () => {
     btn.textContent = answer.classList.contains("active") ? "-" : "+";
   }
 
+  function setLocalStorageQuestion(id) {
+    localStorage.setItem("questionID", id);
+  }
+
+  function initLocalStorage() {
+    if (!localStorage.getItem("questionID")) {
+      setLocalStorageQuestion(1);
+    }
+  }
+
+  function restoreAccordionState() {
+    const questionID = localStorage.getItem("questionID");
+    const faqItem = document.querySelector(
+      `.faq-item[data-id = "${questionID}"]`,
+    );
+    if (!faqItem) return;
+    const faqAnswer = faqItem.querySelector(".faq-answer");
+    const faqBtn = faqItem.querySelector(".faq-btn");
+    toggleFaqAnswer(faqAnswer);
+    updateBtn(faqAnswer, faqBtn);
+  }
+
   const handleFaqClick = (event) => {
     const faqHeader = event.target.closest(".faq-header");
     if (!faqHeader) return;
+    const questionID = event.target.closest(".faq-item").dataset.id;
+    setLocalStorageQuestion(questionID);
     const faqAnswer = faqHeader.nextElementSibling;
     const toggleBtn = faqHeader.querySelector(".faq-btn");
     toggleFaqAnswer(faqAnswer);
@@ -167,4 +191,7 @@ const initAccordion = () => {
   };
 
   accordion.addEventListener("click", handleFaqClick);
+
+  initLocalStorage();
+  restoreAccordionState();
 };
