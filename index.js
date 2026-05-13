@@ -137,6 +137,7 @@ const initSlider = () => {
 const initAccordion = () => {
   const accordion = document.querySelector(".faq-right");
 
+  // показывает ответ на вопрос
   function toggleFaq(faqItem) {
     const faqAnswer = faqItem.querySelector(".faq-answer");
     const faqBtn = faqItem.querySelector(".faq-btn");
@@ -157,20 +158,19 @@ const initAccordion = () => {
     }
   }
 
-  function updateBtn(answer, btn) {
-    btn.textContent = answer.classList.contains("active") ? "-" : "+";
-  }
-
+  // сохраняет значение в localStorage
   function setLocalStorageQuestion(id) {
     localStorage.setItem("questionID", id);
   }
 
+  // показывает ответ на первый вопрос по умолчанию
   function initLocalStorage() {
     if (!localStorage.getItem("questionID")) {
       setLocalStorageQuestion(1);
     }
   }
 
+  // показывает ответ на вопрос после обновления страницы
   function restoreAccordionState() {
     const questionID = localStorage.getItem("questionID");
     const faqItem = document.querySelector(
@@ -181,6 +181,7 @@ const initAccordion = () => {
     toggleFaq(faqItem);
   }
 
+  // отслеживает клик по вопросу
   const handleFaqClick = (event) => {
     const faqHeader = event.target.closest(".faq-header");
     if (!faqHeader) return;
