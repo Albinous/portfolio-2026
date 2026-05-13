@@ -204,6 +204,7 @@ const initModal = () => {
   const openModal = () => {
     const modal = document.querySelector(".modal");
     modal.classList.add("show");
+    document.body.classList.add("no-scroll");
   };
 
   const handleBtnClick = (event) => {
