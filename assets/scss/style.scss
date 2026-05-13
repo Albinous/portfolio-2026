@@ -553,3 +553,52 @@
   text-transform: uppercase;
   color: #fff;
 }
+
+.modal {
+  background-color: rgba($black, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  // opacity: 0;
+  // pointer-events: none;
+  // transition: opacity 0.4s;
+
+  &-container {
+    background-color: #fff;
+    width: 500px;
+    max-width: 100%;
+    padding: 60px;
+  }
+
+  &-form {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  &-btn {
+    width: 100%;
+  }
+
+  &-close {
+    position: relative;
+    top: 0;
+    left: 0;
+          width: 12px;
+      height: 12px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+    }
+  }
+}

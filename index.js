@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initBurgerMenu();
   initSlider();
   initAccordion();
+  initModal();
 });
 
 const initBurgerMenu = () => {
@@ -196,3 +197,5 @@ const initAccordion = () => {
   initLocalStorage();
   restoreAccordionState();
 };
+
+const initModal = () => {};

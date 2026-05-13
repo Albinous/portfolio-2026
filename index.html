@@ -447,8 +447,18 @@
           <h3 class="contact-title">Like my portfolio? Sign up for a shoot!</h3>
 
           <form action="" class="contact-form">
-            <input type="text" placeholder="your name" class="contact-input" />
-            <input type="tel" placeholder="+1" class="contact-input" />
+            <input
+              type="text"
+              id="name"
+              placeholder="your name"
+              class="contact-input"
+            />
+            <input
+              type="tel"
+              id="phone"
+              placeholder="+1"
+              class="contact-input"
+            />
             <button class="contact-btn">book now</button>
           </form>
         </div>
@@ -478,6 +488,24 @@
         </nav>
       </div>
     </footer>
+
+    <div class="modal">
+      <div class="modal-container">
+        <button class="modal-close"></button>
+        <h3 class="contact-title">Like my portfolio? Sign up for a shoot!</h3>
+
+        <form action="" class="contact-form modal-form">
+          <input
+            type="text"
+            id="name"
+            placeholder="your name"
+            class="contact-input"
+          />
+          <input type="tel" id="phone" placeholder="+1" class="contact-input" />
+          <button class="contact-btn modal-btn">book now</button>
+        </form>
+      </div>
+    </div>
 
     <script src="index.js"></script>
   </body>

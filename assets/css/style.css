@@ -786,3 +786,55 @@ section {
   text-transform: uppercase;
   color: #fff;
 }
+
+.modal {
+  background-color: rgba(34, 34, 34, 0.6);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.modal-container {
+  background-color: #fff;
+  width: 500px;
+  max-width: 100%;
+  padding: 60px;
+}
+.modal-form {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+.modal-btn {
+  width: 100%;
+}
+.modal-close {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+}
+.modal-close::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+}
