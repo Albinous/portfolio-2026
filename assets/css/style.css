@@ -807,9 +807,11 @@ section {
   pointer-events: none;
   -webkit-transition: opacity 0.4s;
   transition: opacity 0.4s;
+  z-index: 1000;
 }
 .modal.show {
   opacity: 1;
+  pointer-events: auto;
 }
 .modal-container {
   position: relative;

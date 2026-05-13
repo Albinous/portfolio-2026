@@ -200,11 +200,23 @@ const initAccordion = () => {
 
 const initModal = () => {
   const priceContainer = document.querySelector(".price-items");
+  const closeModalBtn = document.querySelector(".modal-close");
+  const modal = document.querySelector(".modal");
 
   const openModal = () => {
-    const modal = document.querySelector(".modal");
     modal.classList.add("show");
     document.body.classList.add("no-scroll");
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("show");
+    document.body.classList.remove("no-scroll");
+  };
+
+  const handleOverlayClick = (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
   };
 
   const handleBtnClick = (event) => {
@@ -215,4 +227,6 @@ const initModal = () => {
   };
 
   priceContainer.addEventListener("click", handleBtnClick);
+  closeModalBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", handleOverlayClick);
 };
