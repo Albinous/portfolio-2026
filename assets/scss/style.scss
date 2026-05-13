@@ -249,12 +249,13 @@
 
 .hero-btn::after {
   content: "";
-  background-image: url(assets/icons/arrow-down.svg);
-  width: 24px;
-  height: 24px;
   position: absolute;
   top: 0;
   right: 0;
+  background: url(../../assets/icons/arrow-down.svg) no-repeat center;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
 }
 
 .hero-center {
