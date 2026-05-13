@@ -569,6 +569,10 @@
   transition: opacity 0.4s;
   z-index: 1000;
 
+  @include sm-block() {
+    padding: 20px;
+  }
+
   &.show {
     opacity: 1;
     pointer-events: auto;
@@ -580,11 +584,19 @@
     width: 500px;
     max-width: 100%;
     padding: 60px;
+
+    @include sm-block() {
+      padding: 60px 20px;
+    }
   }
 
   &-form {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+  }
+
+  &-input {
     width: 100%;
   }
 
