@@ -198,4 +198,20 @@ const initAccordion = () => {
   restoreAccordionState();
 };
 
-const initModal = () => {};
+const initModal = () => {
+  const priceContainer = document.querySelector(".price-items");
+
+  const openModal = () => {
+    const modal = document.querySelector(".modal");
+    modal.classList.add("show");
+  };
+
+  const handleBtnClick = (event) => {
+    const priceBtn = event.target.closest(".price-item__btn");
+    if (!priceBtn) return;
+
+    openModal();
+  };
+
+  priceContainer.addEventListener("click", handleBtnClick);
+};

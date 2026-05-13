@@ -803,6 +803,13 @@ section {
   left: 0;
   width: 100vw;
   height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+.modal.show {
+  opacity: 1;
 }
 .modal-container {
   position: relative;
